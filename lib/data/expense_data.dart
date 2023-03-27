@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
 import 'package:fourth_app/datetime/date_time_helper.dart';
 import 'package:fourth_app/models/expense_item.dart';
 
-class ExpenseData {
+class ExpenseData extends ChangeNotifier {
   // list of ALL expenses
   List<ExpenseItem> overallExpenseList = [];
 
