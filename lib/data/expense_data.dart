@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fourth_app/datetime/date_time_helper.dart';
-import 'package:fourth_app/models/expense_item.dart';
+
+import '../datetime/date_time_helper.dart';
+import '../models/expense_item.dart';
 
 class ExpenseData extends ChangeNotifier {
   // list of ALL expenses
@@ -14,11 +15,15 @@ class ExpenseData extends ChangeNotifier {
   // add new exspense
   void addNewExpense(ExpenseItem newExpense) {
     overallExpenseList.add(newExpense);
+
+    notifyListeners();
   }
 
   // delete exspence
   void deleteExpense(ExpenseItem expense) {
     overallExpenseList.remove(expense);
+
+    notifyListeners();
   }
 
   // get weekday from a DateTime object
