@@ -32,6 +32,9 @@ class _HomePageState extends State<HomePage> {
             //expense name
             TextField(
               controller: newExpenseNameController,
+              decoration: const InputDecoration(
+                hintText: "Expense Name",
+              ),
             ),
 
             Row(
@@ -40,17 +43,28 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                   child: TextField(
                     controller: newExpensePoundsController,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      hintText: "£",
+                    ),
                   ),
                 ),
+
+                const SizedBox(width: 10),
 
                 // pence
                 Expanded(
                   child: TextField(
                     controller: newExpensePenceController,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      hintText: "p",
+                    ),
                   ),
                 ),
-              ],)
-          ]
+              ],
+            ),
+          ],
 
         ),
         actions: [
@@ -115,6 +129,7 @@ class _HomePageState extends State<HomePage> {
           child: const Icon(Icons.add), 
         ),
         body: ListView(children: [
+          const SizedBox(height: 20),
           // weekly summary
           ExpenseSummary(startOfWeek: value.startOfWeekDate()),
 
