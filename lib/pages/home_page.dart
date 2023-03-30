@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fourth_app/components/expense_summary.dart';
 import 'package:provider/provider.dart';
 
 import '../components/expense_tile.dart';
@@ -98,7 +99,8 @@ class _HomePageState extends State<HomePage> {
         ),
         body: ListView(children: [
           // weekly summary
-          
+          ExpenseSummary(startOfWeek: value.startOfWeekDate()),
+
           // expense list
           ListView.builder(
             shrinkWrap: true,
