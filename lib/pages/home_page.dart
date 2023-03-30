@@ -17,7 +17,8 @@ class _HomePageState extends State<HomePage> {
 
   // text controllers
   final newExpenseNameController = TextEditingController();
-  final newExpenseAmountController = TextEditingController();
+  final newExpensePoundsController = TextEditingController();
+  final newExpensePenceController = TextEditingController();
 
   // add new expense
   void addNewExpense() {
@@ -33,10 +34,22 @@ class _HomePageState extends State<HomePage> {
               controller: newExpenseNameController,
             ),
 
-            // expense amount
-            TextField(
-              controller: newExpenseAmountController,
-            ),
+            Row(
+              children: [
+                // pounds
+                Expanded(
+                  child: TextField(
+                    controller: newExpensePoundsController,
+                  ),
+                ),
+
+                // pence
+                Expanded(
+                  child: TextField(
+                    controller: newExpensePenceController,
+                  ),
+                ),
+              ],)
           ]
 
         ),
@@ -63,10 +76,12 @@ class _HomePageState extends State<HomePage> {
 
   // save method
   void save() {
+    // put pounds and pence together
+    String amount = "${newExpensePoundsController.text}.${newExpensePenceController.text}";
     // create expense item
     ExpenseItem newExpense = ExpenseItem(
       name: newExpenseNameController.text, 
-      amount: newExpenseAmountController.text, 
+      amount: amount, 
       dateTime: DateTime.now(),
     );
     // add the new expense
@@ -85,7 +100,8 @@ class _HomePageState extends State<HomePage> {
   // clear controllwers
   void clear() {
     newExpenseNameController.clear();
-    newExpenseAmountController.clear();
+    newExpensePoundsController.clear();
+    newExpensePenceController.clear();
   }
 
   @override
@@ -95,11 +111,14 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.grey[300],
         floatingActionButton: FloatingActionButton(
           onPressed: addNewExpense,
+          backgroundColor: Colors.black,
           child: const Icon(Icons.add), 
         ),
         body: ListView(children: [
           // weekly summary
           ExpenseSummary(startOfWeek: value.startOfWeekDate()),
+
+          const SizedBox(height: 20),
 
           // expense list
           ListView.builder(
