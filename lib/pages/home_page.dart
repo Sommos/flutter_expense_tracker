@@ -145,14 +145,20 @@ class _HomePageState extends State<HomePage> {
     if(newExpenseNameController.text.isNotEmpty && 
       newExpensePoundsController.text.isNotEmpty && 
       newExpensePenceController.text.isNotEmpty) {
+
+      // set string to first letter uppercase
+      String capitalisedText = newExpenseNameController.text.substring(0, 1).toUpperCase() + newExpenseNameController.text.substring(1);
+
       // put pounds and pence together
       String amount = "${newExpensePoundsController.text}.${newExpensePenceController.text}";
+
       // create expense item
       ExpenseItem newExpense = ExpenseItem(
-        name: newExpenseNameController.text, 
+        name: capitalisedText, 
         amount: amount, 
         dateTime: DateTime.now(),
       );
+
       // add the new expense
       Provider.of<ExpenseData>(context, listen: false).addNewExpense(newExpense);
     }
