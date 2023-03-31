@@ -104,6 +104,12 @@ class _HomePageState extends State<HomePage> {
     Provider.of<ExpenseData>(context, listen: false).deleteExpense(expense);
   }
 
+  // edit method
+  void edit(ExpenseItem expense) {
+    delete(expense);
+    addNewExpense();
+  }
+
   // save method
   void save() {
     // only save expense if all fields are filled
@@ -166,6 +172,8 @@ class _HomePageState extends State<HomePage> {
               dateTime: value.getAllExpenseList()[index].dateTime,
               deleteTapped: (p0) =>
                 delete(value.getAllExpenseList()[index]),
+              editTapped: (p0) =>
+                edit(value.getAllExpenseList()[index]),
             ),
           ),
         ]),
