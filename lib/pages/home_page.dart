@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fourth_app/components/expense_summary.dart';
 import 'package:provider/provider.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
+import '../components/expense_summary.dart';
 import '../components/expense_tile.dart';
 import '../data/expense_data.dart';
 import '../models/expense_item.dart';

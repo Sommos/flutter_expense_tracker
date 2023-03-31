@@ -48,17 +48,17 @@ class MyBarGraph extends StatelessWidget {
           show: true,
           topTitles: AxisTitles(
             sideTitles: SideTitles(
-              showTitles: false
+              showTitles: false,
             ),
           ),
           leftTitles: AxisTitles(
             sideTitles: SideTitles(
-              showTitles: false
+              showTitles: false,
             ),
           ),
           rightTitles: AxisTitles(
             sideTitles: SideTitles(
-              showTitles: false
+              showTitles: false,
             ),
           ),
           bottomTitles: AxisTitles(
