@@ -99,6 +99,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // delete method
+  void delete(ExpenseItem expense) {
+    Provider.of<ExpenseData>(context, listen: false).deleteExpense(expense);
+  }
+
   // save method
   void save() {
     // put pounds and pence together
@@ -140,7 +145,6 @@ class _HomePageState extends State<HomePage> {
           child: const Icon(Icons.add), 
         ),
         body: ListView(children: [
-          const SizedBox(height: 20),
           // weekly summary
           ExpenseSummary(startOfWeek: value.startOfWeekDate()),
 
