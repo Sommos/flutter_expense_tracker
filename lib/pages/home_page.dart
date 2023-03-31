@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fourth_app/components/expense_summary.dart';
 import 'package:provider/provider.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '../components/expense_tile.dart';
 import '../data/expense_data.dart';
@@ -32,11 +33,27 @@ class _HomePageState extends State<HomePage> {
   }
 
   // add new expense
-  void addNewExpense() {
+  void addNewExpense(
+    {edit = false, 
+    oldTextData = "", 
+    oldPoundsData = "", 
+    oldPenceData = "",
+    text = ""}
+  ) {
+    // if an edit is being done change the texts to contain what is retrieved from the hive database
+    if(edit) {
+      newExpenseNameController.text = oldTextData;
+      newExpensePoundsController.text = oldPoundsData;
+      newExpensePenceController.text = oldPenceData;
+      text = "Edit an expense";
+    } else {
+      text = "Add new expense";
+    }
+
     showDialog(
       context: context, 
       builder: (context) => AlertDialog(
-        title: const Text("Add new expense"),
+        title: Text(text),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -105,9 +122,21 @@ class _HomePageState extends State<HomePage> {
   }
 
   // edit method
-  void edit(ExpenseItem expense) {
-    delete(expense);
-    addNewExpense();
+  void edit (ExpenseItem expense) {
+    // split the string returned from 'expense.amount'
+    List<String> split = expense.amount.split('.');
+
+    // save the split amounts in independent variables
+    String pounds = split[0];
+    String pence = split[1];
+
+    // put the data in to the text fields
+    addNewExpense(
+      edit: true, 
+      oldTextData: expense.name, 
+      oldPoundsData: pounds, 
+      oldPenceData: pence
+    );
   }
 
   // save method
