@@ -149,6 +149,11 @@ class _HomePageState extends State<HomePage> {
       // set string to first letter uppercase
       String capitalisedText = newExpenseNameController.text.substring(0, 1).toUpperCase() + newExpenseNameController.text.substring(1);
 
+      // if the pence has been entered with only one digit, append a zero
+      if (newExpensePenceController.text.length < 2) {
+        newExpensePenceController.text += "0";
+      }
+
       // put pounds and pence together
       String amount = "${newExpensePoundsController.text}.${newExpensePenceController.text}";
 
