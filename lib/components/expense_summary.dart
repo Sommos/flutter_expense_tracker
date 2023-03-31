@@ -12,6 +12,38 @@ class ExpenseSummary extends StatelessWidget {
     required this.startOfWeek,
   });
 
+  // calculate max amount in the bar graph
+  double calculateMax(
+    ExpenseData value, 
+    String sunday, 
+    String monday, 
+    String tuesday,
+    String wednesday,
+    String thursday,
+    String friday,
+    String saturday,
+  ) {
+    double? max = 100;
+
+    List<double> values = [
+      value.calculateDailyExpenseSummary()[sunday] ?? 0,
+      value.calculateDailyExpenseSummary()[monday] ?? 0,
+      value.calculateDailyExpenseSummary()[tuesday] ?? 0,
+      value.calculateDailyExpenseSummary()[wednesday] ?? 0,
+      value.calculateDailyExpenseSummary()[thursday] ?? 0,
+      value.calculateDailyExpenseSummary()[friday] ?? 0,
+      value.calculateDailyExpenseSummary()[saturday] ?? 0,
+    ];
+
+    // sort from smallest to largest
+    values.sort();
+
+    // get largest amount and increase the cap slightly
+    max = values.last * 1.1;
+
+    return max == 0 ? 100 : max;
+  }
+
   @override
   Widget build(BuildContext context) {
     // get yyyymmdd for each day of this week
@@ -27,7 +59,7 @@ class ExpenseSummary extends StatelessWidget {
       builder: (context, value, child) => SizedBox(
         height: 200,
         child: MyBarGraph(
-          maxY: 100,
+          maxY: calculateMax(value, sunday, monday, tuesday, wednesday, thursday, friday, saturday),
           sunAmount: value.calculateDailyExpenseSummary()[sunday] ?? 0,
           monAmount: value.calculateDailyExpenseSummary()[monday] ?? 0,
           tueAmount: value.calculateDailyExpenseSummary()[tuesday] ?? 0,
