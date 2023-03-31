@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../data/expense_data.dart';
-import '../bar%20graph/bar_graph.dart';
 import '../datetime/date_time_helper.dart';
+import '../bar%20graph/bar_graph.dart';
 
 class ExpenseSummary extends StatelessWidget {
   final DateTime startOfWeek;
@@ -88,10 +88,10 @@ class ExpenseSummary extends StatelessWidget {
         children: [
           // show total for the week
           Padding(
-            padding: const EdgeInsets.all(25.0),
+            padding: const EdgeInsets.all(30.0),
             child: Row(
               children: [
-                const Text("Week Total: ", style: TextStyle(fontWeight: FontWeight.bold),),
+                const Text("Weekly Total: ", style: TextStyle(fontWeight: FontWeight.bold),),
                 Text("£${calculateWeekTotal(value, sunday, monday, tuesday, wednesday, thursday, friday, saturday)}"),
               ],
             ),
